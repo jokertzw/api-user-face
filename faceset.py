@@ -1,10 +1,13 @@
+
+# 用来建立新生照片库
+
 import requests
 
 import json
 import os
 
 filename = "one.jpg"
-path1 = "C:\\Users\\23584\\PycharmProjects\\face++\\Face++test\\director\\"
+path1 = "E:\\桌面文件夹\\freshman_project\\face++\\Face++test\\科协照片\\"
 files1 = os.listdir(path1)
 files = {}
 api_keyt = "zppJzy9Z4dF8zF4zvpyfkxOkINB89gJH"
@@ -41,24 +44,34 @@ data_userid = {
 dataface = {
     "api_key": api_key,
     "api_secret": api_secret,
-    "outer_id":"QUST2019director",
+    "outer_id":"AQUST2019",
     "force_merge":1,
 }
-
+# 上传主任部长
 for filepath in files1:
     print(path1 + filepath)
     files["image_file"] = open(path1 + filepath, 'rb').read()
     r = requests.post(url=urldec, files=files,data=datad)
-    faceset_token = json.loads(r.text)["faces"][0]['face_token']
-    # dataface["user_data"] = filepath
-    dataface["face_tokens"] = faceset_token
-    data_userid["face_token"] = faceset_token
-    data_userid["user_id"] = filepath
-    rset = requests.post(url=urlfaceset, data=dataface)
-    r_userid=requests.post(url=url_userid,  data=data_userid)
+    print(r.text)
+    try:
+        faceset_token = json.loads(r.text)["faces"][0]['face_token']
+        dataface["face_tokens"] = faceset_token
+        data_userid["face_token"] = faceset_token
 
-    print(rset.text)
-    print(r_userid.text)
+        # name = filepath.split('.')
+        # S_name = name[0]+'主任'+'.'+name[1]
+        S_name = filepath
+
+        data_userid["user_id"] = S_name
+        rset = requests.post(url=urlfaceset, data=dataface)
+        r_userid=requests.post(url=url_userid,  data=data_userid)
+
+        print(rset.text)
+        print(r_userid.text)
+    except BaseException:
+        print("请检查文件夹")
+
+
     # print(faceset_token)
     # print(type(faceset_token))
 

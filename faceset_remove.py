@@ -1,12 +1,14 @@
 import requests
 import json
-api_key = "i4efjO8MKkW5QwxOoqHGlWfFqxGLk_eG"
-api_secret = "ZHSvAQxSwakKRXeeH1pFwhD1Tpx1CDmU"
-urls = " c69cb459389275ec91d9cbcd0f0d4438"
+api_key = "pqA9vO_M8eeo7mfl8H023i6K9GiSv1we"
+api_secret = "0CBwd83rZWdmQEwvhjheaJdixQ-yeNWB"
+urls = " https://api-cn.faceplusplus.com/facepp/v3/faceset/delete"
 
 datag = {
     "api_key": api_key,
     "api_secret": api_secret,
+    "outer_id": "QUST2019director",
+    "check_empty":0
 }
 
 
